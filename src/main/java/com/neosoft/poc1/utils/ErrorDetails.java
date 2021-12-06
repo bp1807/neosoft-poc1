@@ -1,4 +1,4 @@
-package com.neosoft.poc1.exception;
+package com.neosoft.poc1.utils;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

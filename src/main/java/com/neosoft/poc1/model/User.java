@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -20,6 +22,8 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "USER")
+@SQLDelete(sql = "UPDATE user SET IS_DELETED = true WHERE id=?")
+@Where(clause = "IS_DELETED=false")
 public class User {
 
     @Id
@@ -27,16 +31,17 @@ public class User {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer id;
 
-    @NotBlank
+    @NotBlank(message = "Name cannot be blank")
     @Column(name = "NAME", nullable = false)
     private String name;
 
-    @NotBlank
+    @NotBlank(message = "Surname cannot be blank")
     @Column(name = "SURNAME", nullable = false)
     private String surname;
 
     @Pattern(regexp = "^[1-9][0-9]{5}$", message = "Enter valid pincode")
     @Column(name = "PINCODE", nullable = false)
+    @NotBlank(message = "Pincode cannot be blank")
     private String pincode;
 
     @Past
@@ -49,4 +54,7 @@ public class User {
     @JsonFormat(pattern = "dd-MM-yyyy")
     @Column(name = "DATE_OF_JOINING", nullable = false)
     private LocalDate dateOfJoining;
+
+    @Column(name = "IS_DELETED")
+    private Boolean isDeleted  = Boolean.FALSE;
 }
