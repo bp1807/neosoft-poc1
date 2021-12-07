@@ -8,11 +8,11 @@ POC1 task for User details
 4.Adding a user.<br>
 5.Retrieving a user.<br>
 6.Implemented searching and sorting using specififaction args resolver,works like magic :)<br>
-7.Implemented soft deleting and purging of a row.<br>
-8.Implemented Editing a user based on user id.<br>
+7.Implemented soft deleting(using @SQLDelete and @Where on User Entity) and purging of a row(using @Query on custom User repo method.<br>
+8.Implemented editing a user based on user id.<br>
 
 <h3>Working Components</h3>
-1.Regitering<br>
+1.Registering<br>
 2.Editing a user<br>
 3.Search User by Name or Surname or Pincode<br>
 4.Sort User by DOB & Joining Date.<br>
