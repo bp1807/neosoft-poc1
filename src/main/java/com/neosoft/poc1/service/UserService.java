@@ -5,6 +5,7 @@ import com.neosoft.poc1.model.User;
 import com.neosoft.poc1.repo.UserRepo;
 import com.neosoft.poc1.utils.PagingHeaders;
 import com.neosoft.poc1.utils.PagingResponse;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -20,6 +21,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 @Service
+@AllArgsConstructor
 public class UserService {
 
     @Autowired

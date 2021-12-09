@@ -1,0 +1,1 @@
+INSERT INTO user (id, name, surname, pincode, date_Of_birth, date_Of_joining, is_deleted)  values (22, 'Bhavik', 'Parmar', '400070', '1997-01-01' , '2021-01-01', false);
