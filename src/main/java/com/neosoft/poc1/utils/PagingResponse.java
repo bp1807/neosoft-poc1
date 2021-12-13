@@ -28,10 +28,6 @@ public class PagingResponse {
      */
     private Long pageSize;
     /**
-     * Offset from the of pagination.
-     */
-    private Long pageOffset;
-    /**
      * the number total of pages.
      */
     private Long pageTotal;

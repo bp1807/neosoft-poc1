@@ -72,7 +72,7 @@ public class UserService {
             return get(spec, buildPageRequest(headers, sort));
         } else {
             final List<User> entities = get(spec, sort);
-            return new PagingResponse((long) entities.size(), 0L, 0L, 0L, 0L, entities);
+            return new PagingResponse((long) entities.size(), 0L, 0L, 0L, entities);
         }
     }
 
@@ -89,7 +89,10 @@ public class UserService {
     public PagingResponse get(Specification<User> spec, Pageable pageable) {
         Page<User> page = userRepo.findAll(spec, pageable);
         List<User> content = page.getContent();
-        return new PagingResponse(page.getTotalElements(), (long) page.getNumber(), (long) page.getNumberOfElements(), pageable.getOffset(), (long) page.getTotalPages(), content);
+        if(content.size() == 0)
+            throw new UserNotFoundException("Users for page number " + page.getNumber() + " not found");
+        else
+            return new PagingResponse(page.getTotalElements(), (long) page.getNumber(), (long) page.getNumberOfElements(), (long) page.getTotalPages(), content);
     }
 
     private boolean isRequestPaged(HttpHeaders headers) {

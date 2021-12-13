@@ -32,17 +32,17 @@ public class UserController {
 
     @PostMapping("/addUser")
     public ResponseEntity<User> addUser(@Valid @RequestBody User user){
-        return new ResponseEntity<User>(userService.addUser(user), HttpStatus.CREATED);
+        return new ResponseEntity<>(userService.addUser(user), HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<User> getUser(@PathVariable Integer id){
-        return new ResponseEntity<User>(userService.getUser(id), HttpStatus.OK);
+        return new ResponseEntity<>(userService.getUser(id), HttpStatus.OK);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<User> editUser(@PathVariable Integer id, @RequestBody User user){
-        return new ResponseEntity<User>(userService.editUser(id, user), HttpStatus.OK);
+        return new ResponseEntity<>(userService.editUser(id, user), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
@@ -58,7 +58,7 @@ public class UserController {
     @Transactional
     @GetMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<List<User>> get(
+    public ResponseEntity<List<User>> getMultipleUsers(
             @And({
                     @Spec(path = "name", params = "name", spec = Like.class),
                     @Spec(path = "surname", params = "surname", spec = Like.class),
@@ -74,7 +74,6 @@ public class UserController {
         HttpHeaders headers = new HttpHeaders();
         headers.set(PagingHeaders.COUNT.getName(), String.valueOf(response.getCount()));
         headers.set(PagingHeaders.PAGE_SIZE.getName(), String.valueOf(response.getPageSize()));
-        headers.set(PagingHeaders.PAGE_OFFSET.getName(), String.valueOf(response.getPageOffset()));
         headers.set(PagingHeaders.PAGE_NUMBER.getName(), String.valueOf(response.getPageNumber()));
         headers.set(PagingHeaders.PAGE_TOTAL.getName(), String.valueOf(response.getPageTotal()));
         return headers;
